@@ -38,6 +38,8 @@
         button:hover {
             background-color: #0056b3;
         }
+        
+
         .update-list {
             text-align: left;
             margin: 20px auto;
@@ -72,6 +74,8 @@
         </select>
 
         <button onclick="submitForm()">確認登記</button>
+        <button onclick="clearAllData()" style="background-color: red;">清除所有登記</button>
+
     </div>
 
     <div class="update-list">
@@ -201,8 +205,30 @@
     }
 
     }
+function clearAllData() {
+    // 清空 stationData 裡的所有學號陣列
+    for (let tripType in stationData) {
+        for (let station in stationData[tripType]) {
+            stationData[tripType][station] = [];
+        }
+    }
+
+    // 更新畫面顯示
+    updateStationList("離營");
+    updateStationList("回營");
+
+    alert("所有登記資料已清除！");
+}
    
 </script>
+
+             
+
+
+    
+
+</body>
+</html>
 
              
 
