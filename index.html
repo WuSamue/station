@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)file:///C:/Users/USER/Desktop/1.html -->
+<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搭車登記</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        label, select, input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .update-list {
+            text-align: left;
+            margin: 20px auto;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>搭車登記</h2>
+        <label for="studentID">學號：</label>
+        <input type="text" id="studentID" placeholder="請輸入學號">
+
+        <label for="tripType">選擇行程：</label>
+        <select id="tripType">
+            <option value="離營">離營</option>
+            <option value="回營">回營</option>
+        </select>
+
+        <label for="station">選擇搭車地點：</label>
+        <select id="station">
+            <option value="埔里郵局">埔里郵局</option>
+            <option value="山隆加油站">草屯 - 山隆加油站</option>
+            <option value="名間金交流店">名間 - 金交流店</option>
+            <option value="金味香">竹山 - 金味香</option>
+            <option value="彰化">彰化</option>
+            <option value="新員高門市">溪湖 - 新員高門市</option>
+            <option value="中油北斗交流道">埤頭 - 中油北斗交流道</option>
+            <option value="永業門市">西螺 - 永業門市</option>
+            <option value="斗高門市">斗南 - 斗高門市</option>
+            <option value="斗六火車站">斗六 - 火車站</option>
+        </select>
+
+        <button onclick="submitForm()">確認登記</button>
+    </div>
+
+    <div class="update-list">
+        <h3>三營-各班搭車名單</h3>
+        <h4>「離營」</h4>
+        <p><strong>埔里一車</strong></p>
+        <ul id="puliList"><li>埔里：埔里郵局-營區 人員：11, 11, 11</li>
+                                                                <li>草屯：山隆加油站-營區 人員：</li>
+                                                                <li>名間：名間金交流店-營區 人員：   							        </li>
+                                                                <li>竹山：金味香-營區 人員：</li></ul>
+
+        <p><strong>彰化一站</strong></p>
+        <ul id="changhuaList"><li>彰化 人員：</li></ul>
+
+        <p><strong>溪湖一車</strong></p>
+        <ul id="xihuList"><li>溪湖：新員高門市 人員：</li>
+                                                                <li>埤頭：中油北斗交流道 人員：</li>
+                                                                <li>西螺：永業門市 人員：</li></ul>
+
+        <p><strong>斗南一車</strong></p>
+        <ul id="dounanList"><li>斗南：斗高門市 人員：</li>
+                                                                  <li>斗六：斗六火車站 人員：</li></ul>
+
+        <h4>「回營」</h4>
+        <p><strong>埔里一車</strong></p>
+        <ul id="puliReturnList"><li>埔里：埔里郵局-營區 人員：12, 13, 11</li>
+                                                                <li>草屯：山隆加油站-營區 人員：</li>
+                                                                <li>名間：名間金交流店-營區 人員：</li>
+                                                                <li>竹山：金味香-營區 人員：</li></ul>
+
+        <p><strong>彰化一站</strong></p>
+        <ul id="changhuaReturnList"><li>彰化 人員：</li></ul>
+
+        <p><strong>溪湖一車</strong></p>
+        <ul id="xihuReturnList"><li>溪湖：新員高門市 人員：</li>
+                                                                <li>埤頭：中油北斗交流道 人員：</li>
+                                                                <li>西螺：永業門市 人員：</li></ul>
+
+        <p><strong>斗南一車</strong></p>
+        <ul id="dounanReturnList"><li>斗南：斗高門市 人員：</li>
+                                                                  <li>斗六：斗六火車站 人員：</li></ul>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script>
+    // 用來保存各站的學號資料
+    const stationData = {
+        "離營": {
+            "埔里郵局": [],
+            "山隆加油站": [],
+            "名間金交流店": [],
+            "金味香": [],
+            "彰化": [],
+            "新員高門市": [],
+            "中油北斗交流道": [],
+            "永業門市": [],
+            "斗高門市": [],
+            "斗六火車站": []
+        },
+        "回營": {
+            "埔里郵局": [],
+            "山隆加油站": [],
+            "名間金交流店": [],
+            "金味香": [],
+            "彰化": [],
+            "新員高門市": [],
+            "中油北斗交流道": [],
+            "永業門市": [],
+            "斗高門市": [],
+            "斗六火車站": []
+        }
+    };
+
+    function submitForm() {
+        let studentID = document.getElementById("studentID").value;
+        let tripType = document.getElementById("tripType").value;
+        let station = document.getElementById("station").value;
+
+        if (studentID.trim() === "") {
+            alert("請輸入學號！");
+            return;
+        }
+
+        // 將學號加入對應的車站，根據選擇的行程類型
+        stationData[tripType][station].push(studentID);
+
+        // 更新顯示在頁面上的學號名單
+        updateStationList(tripType);
+
+        // 清空表單
+        document.getElementById("studentID").value = "";
+    }
+
+    // 更新顯示每個車站的人員名單，只更新對應的行程
+    function updateStationList(tripType) {
+        if (tripType === "離營") {
+            document.getElementById("puliList").innerHTML = `<li>埔里：埔里郵局-營區 人員：${stationData["離營"]["埔里郵局"].join(", ")}</li>
+                                                                <li>草屯：山隆加油站-營區 人員：${stationData["離營"]["山隆加油站"].join(", ")}</li>
+                                                                <li>名間：名間金交流店-營區 人員：${stationData["離營"]["名間金交流店"].join(", ")}   							        </li>
+                                                                <li>竹山：金味香-營區 人員：${stationData["離營"]["金味香"].join(", ")}</li>`;
+            document.getElementById("changhuaList").innerHTML = `<li>彰化 人員：${stationData["離營"]["彰化"].join(", ")}</li>`;
+            document.getElementById("xihuList").innerHTML = `<li>溪湖：新員高門市 人員：${stationData["離營"]["新員高門市"].join(", ")}</li>
+                                                                <li>埤頭：中油北斗交流道 人員：${stationData["離營"]["中油北斗交流道"].join(", ")}</li>
+                                                                <li>西螺：永業門市 人員：${stationData["離營"]["永業門市"].join(", ")}</li>`;
+            document.getElementById("dounanList").innerHTML = `<li>斗南：斗高門市 人員：${stationData["離營"]["斗高門市"].join(", ")}</li>
+                                                                  <li>斗六：斗六火車站 人員：${stationData["離營"]["斗六火車站"].join(", ")}</li>`;
+        }
+         else if (tripType === "回營") {
+        document.getElementById("puliReturnList").innerHTML = `<li>埔里：埔里郵局-營區 人員：${stationData["回營"]["埔里郵局"].join(", ")}</li>
+                                                                <li>草屯：山隆加油站-營區 人員：${stationData["回營"]["山隆加油站"].join(", ")}</li>
+                                                                <li>名間：名間金交流店-營區 人員：${stationData["回營"]["名間金交流店"].join(", ")}</li>
+                                                                <li>竹山：金味香-營區 人員：${stationData["回營"]["金味香"].join(", ")}</li>`;
+        document.getElementById("changhuaReturnList").innerHTML = `<li>彰化 人員：${stationData["回營"]["彰化"].join(", ")}</li>`;
+        document.getElementById("xihuReturnList").innerHTML = `<li>溪湖：新員高門市 人員：${stationData["回營"]["新員高門市"].join(", ")}</li>
+                                                                <li>埤頭：中油北斗交流道 人員：${stationData["回營"]["中油北斗交流道"].join(", ")}</li>
+                                                                <li>西螺：永業門市 人員：${stationData["回營"]["永業門市"].join(", ")}</li>`;
+        document.getElementById("dounanReturnList").innerHTML = `<li>斗南：斗高門市 人員：${stationData["回營"]["斗高門市"].join(", ")}</li>
+                                                                  <li>斗六：斗六火車站 人員：${stationData["回營"]["斗六火車站"].join(", ")}</li>`;
+    }
+
+    }
+   
+</script>
+
+             
+
+
+    
+
+</body></html>
