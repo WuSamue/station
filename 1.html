@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0036)file:///C:/Users/USER/Desktop/1.html -->
+<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>搭車登記</title>
     <style>
@@ -38,6 +38,8 @@
         button:hover {
             background-color: #0056b3;
         }
+        
+
         .update-list {
             text-align: left;
             margin: 20px auto;
@@ -72,63 +74,49 @@
         </select>
 
         <button onclick="submitForm()">確認登記</button>
+        <button onclick="clearAllData()" style="background-color: red;">清除所有登記</button>
+
     </div>
 
     <div class="update-list">
         <h3>三營-各班搭車名單</h3>
         <h4>「離營」</h4>
         <p><strong>埔里一車</strong></p>
-        <ul id="puliList">
-            <li>埔里：埔里郵局-營區 人員：</li>
-            <li>草屯：山隆加油站-營區 人員：</li>
-            <li>名間：名間金交流店-營區 人員：</li>
-            <li>竹山：金味香-營區 人員：</li>
-        </ul>
+        <ul id="puliList"><li>埔里：埔里郵局-營區 人員：11, 11, 11</li>
+                                                                <li>草屯：山隆加油站-營區 人員：</li>
+                                                                <li>名間：名間金交流店-營區 人員：   							        </li>
+                                                                <li>竹山：金味香-營區 人員：</li></ul>
 
         <p><strong>彰化一站</strong></p>
-        <ul id="changhuaList">
-            <li>彰化 人員：</li>
-        </ul>
+        <ul id="changhuaList"><li>彰化 人員：</li></ul>
 
         <p><strong>溪湖一車</strong></p>
-        <ul id="xihuList">
-            <li>溪湖：新員高門市 人員：</li>
-            <li>埤頭：中油北斗交流道 人員：</li>
-            <li>西螺：永業門市 人員：</li>
-        </ul>
+        <ul id="xihuList"><li>溪湖：新員高門市 人員：</li>
+                                                                <li>埤頭：中油北斗交流道 人員：</li>
+                                                                <li>西螺：永業門市 人員：</li></ul>
 
         <p><strong>斗南一車</strong></p>
-        <ul id="dounanList">
-            <li>斗南：斗高門市 人員：</li>
-            <li>斗六：斗六火車站 人員：</li>
-        </ul>
+        <ul id="dounanList"><li>斗南：斗高門市 人員：</li>
+                                                                  <li>斗六：斗六火車站 人員：</li></ul>
 
         <h4>「回營」</h4>
         <p><strong>埔里一車</strong></p>
-        <ul id="puliReturnList">
-            <li>埔里：埔里郵局-營區 人員：</li>
-            <li>草屯：山隆加油站-營區 人員：</li>
-            <li>名間：名間金交流店-營區 人員：</li>
-            <li>竹山：金味香-營區 人員：</li>
-        </ul>
+        <ul id="puliReturnList"><li>埔里：埔里郵局-營區 人員：12, 13, 11</li>
+                                                                <li>草屯：山隆加油站-營區 人員：</li>
+                                                                <li>名間：名間金交流店-營區 人員：</li>
+                                                                <li>竹山：金味香-營區 人員：</li></ul>
 
         <p><strong>彰化一站</strong></p>
-        <ul id="changhuaReturnList">
-            <li>彰化 人員：</li>
-        </ul>
+        <ul id="changhuaReturnList"><li>彰化 人員：</li></ul>
 
         <p><strong>溪湖一車</strong></p>
-        <ul id="xihuReturnList">
-            <li>溪湖：新員高門市 人員：</li>
-            <li>埤頭：中油北斗交流道 人員：</li>
-            <li>西螺：永業門市 人員：</li>
-        </ul>
+        <ul id="xihuReturnList"><li>溪湖：新員高門市 人員：</li>
+                                                                <li>埤頭：中油北斗交流道 人員：</li>
+                                                                <li>西螺：永業門市 人員：</li></ul>
 
         <p><strong>斗南一車</strong></p>
-        <ul id="dounanReturnList">
-            <li>斗南：斗高門市 人員：</li>
-            <li>斗六：斗六火車站 人員：</li>
-        </ul>
+        <ul id="dounanReturnList"><li>斗南：斗高門市 人員：</li>
+                                                                  <li>斗六：斗六火車站 人員：</li></ul>
     </div>
 
 
@@ -217,8 +205,30 @@
     }
 
     }
+function clearAllData() {
+    // 清空 stationData 裡的所有學號陣列
+    for (let tripType in stationData) {
+        for (let station in stationData[tripType]) {
+            stationData[tripType][station] = [];
+        }
+    }
+
+    // 更新畫面顯示
+    updateStationList("離營");
+    updateStationList("回營");
+
+    alert("所有登記資料已清除！");
+}
    
 </script>
+
+             
+
+
+    
+
+</body>
+</html>
 
              
 
